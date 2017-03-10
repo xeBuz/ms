@@ -1,6 +1,6 @@
 <?php
 
-namespace Mono;
+namespace Mono\Repository;
 
 
 class LanguageRepository extends MonoRepository

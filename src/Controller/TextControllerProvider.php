@@ -1,9 +1,11 @@
 <?php
 
-namespace Mono;
+namespace Mono\Controller;
 
+use Mono\Repository\ResellerRepository;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class TextControllerProvider implements ControllerProviderInterface
@@ -20,7 +22,8 @@ class TextControllerProvider implements ControllerProviderInterface
             $db = new ResellerRepository($app);
             $resellers = $db->getAll();
 
-            var_dump($resellers);
+            return Response::create($resellers);
+            // var_dump($resellers);
         });
 
         return $controllers;

@@ -1,6 +1,9 @@
 <?php
 
-namespace Mono;
+namespace Mono\Repository;
+
+use Mono\Entity\Language;
+use Mono\Entity\Reseller;
 
 class TextRepository extends MonoRepository
 {

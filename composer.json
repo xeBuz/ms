@@ -9,8 +9,8 @@
       "doctrine/dbal": "~2.2"
   },
   "autoload": {
-      "psr-0": {
-          "Mono": "src/"
+      "psr-4": {
+          "Mono\\": "src/"
       }
   }
 }

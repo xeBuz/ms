@@ -1,6 +1,6 @@
 <?php
 
-namespace Mono;
+namespace Mono\Repository;
 
 use Silex\Application;
 

@@ -1,8 +1,8 @@
 <?php
 
+use Mono\Controller\TextControllerProvider;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
-use Mono\TextControllerProvider;
 
 const API_VERSION = 'v1.0';
 
@@ -18,8 +18,7 @@ $app->register(new DoctrineServiceProvider(),
 );
 
 $app->mount(
-    sprintf('/api/text', API_VERSION),
-    new TextControllerProvider()
+    sprintf('/api/text', API_VERSION), new TextControllerProvider()
 );
 
 return $app;

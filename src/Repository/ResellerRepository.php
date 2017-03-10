@@ -1,6 +1,6 @@
 <?php
 
-namespace Mono;
+namespace Mono\Repository;
 
 
 class ResellerRepository  extends MonoRepository
@@ -8,6 +8,7 @@ class ResellerRepository  extends MonoRepository
 
     public function getAll($justEnabled = false) {
 
+        return [1, 2, 3];
     }
 
 
