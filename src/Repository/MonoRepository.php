@@ -14,18 +14,25 @@ class MonoRepository
 
     /**
      * @param $sql
+     * @param array $params
      * @return mixed
      */
-    private function getAll($sql) {
-        return $this->db->fetchAll($sql);
+    protected function fetch($sql, $params = []) {
+        $statement = $this->db->executeQuery($sql, $params);
+        return $statement->fetchAll();
     }
 
     /**
      * @param $sql
+     * @param array $params
      * @return mixed
      */
-    private function getOne($sql) {
-        return $this->db->fetch($sql);
+    protected function fetchOne($sql, $params = []) {
+        $fetch = $this->fetch($sql, $params);
+        if (count($fetch) > 0) {
+            return $fetch[0];
+        } else {
+            return null;
+        }
     }
-
 }

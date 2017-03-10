@@ -3,13 +3,13 @@
 namespace Mono\Entity;
 
 
-class Reseller
+class Reseller implements MonoEntity
 {
     private $id;
     private $name;
     private $address;
     private $phone;
-    private $enabled;
+    private $active;
 
     /**
      * Reseller constructor.
@@ -18,14 +18,14 @@ class Reseller
      * @param $name
      * @param $address
      * @param $phone
-     * @param $enabled
+     * @param $active
      */
-    public function __construct($id, $name, $address, $phone, $enabled) {
+    public function __construct($id, $name, $address, $phone, $active) {
         $this->id = $id;
         $this->name = $name;
         $this->address = $address;
         $this->phone = $phone;
-        $this->enabled = $enabled;
+        $this->active = $active;
     }
 
 
@@ -36,7 +36,7 @@ class Reseller
     public static function createFromArray($array) {
         $address = null;
         $phone = null;
-        $enabled = true;
+        $active = true;
 
         if (isset($array['id'])) {
             $id = $array['id'];
@@ -58,13 +58,24 @@ class Reseller
             $phone = $array['phone'];
         }
 
-        if (isset($array['enabled'])) {
-            $enabled = $array['enabled'];
+        if (isset($array['active'])) {
+            $active = $array['active'];
         }
 
-        return new Reseller($id, $name, $address, $phone, $enabled);
+        return new Reseller($id, $name, $address, $phone, $active);
     }
 
+
+    public function getResponse()
+    {
+        return [
+            'id'      => $this->getId(),
+            'name'    => $this->getName(),
+            'address' => $this->getAddress(),
+            'phone'   => $this->getPhone(),
+            'active'  => $this->getActive()
+        ];
+    }
 
     /**
      * @return mixed
@@ -89,7 +100,6 @@ class Reseller
     {
         return $this->name;
     }
-
 
     /**
      * @param $address
@@ -124,18 +134,18 @@ class Reseller
     }
 
     /**
-     * @param mixed $enabled
+     * @return mixed
      */
-    public function setEnabled($enabled)
+    public function getActive()
     {
-        $this->enabled = $enabled;
+        return (bool) $this->active;
     }
 
     /**
-     * @return mixed
+     * @param mixed $active
      */
-    public function getEnabled()
+    public function setActive($active)
     {
-        return $this->enabled;
+        $this->active = $active;
     }
 }

@@ -3,26 +3,24 @@
 namespace Mono\Repository;
 
 
-class ResellerRepository  extends MonoRepository
+use Mono\Entity\Reseller;
+
+class ResellerRepository extends MonoRepository
 {
 
-    public function getAll($justEnabled = false) {
-
-        return [1, 2, 3];
-    }
-
-
     /**
-     * @param $id
+     * @return array
      */
-    public function getById($id) {
+    public function getAll() {
+        $sql = "SELECT * FROM resellers";
+        $resellers = $this->fetch($sql);
 
-    }
+        $data = [];
 
-    /**
-     * @param $name
-     */
-    public function getByName($name) {
+        foreach ($resellers as $reseller) {
+            $data[] = Reseller::createFromArray($reseller);
+        }
 
+        return $data;
     }
 }

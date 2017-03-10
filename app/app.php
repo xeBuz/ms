@@ -1,5 +1,7 @@
 <?php
 
+use Mono\Controller\LanguageControllerProvider;
+use Mono\Controller\ResellerControllerProvider;
 use Mono\Controller\TextControllerProvider;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
@@ -18,7 +20,17 @@ $app->register(new DoctrineServiceProvider(),
 );
 
 $app->mount(
-    sprintf('/api/text', API_VERSION), new TextControllerProvider()
+    sprintf('/api/text', API_VERSION),
+    new TextControllerProvider()
 );
 
+$app->mount(
+    sprintf('/api/reseller', API_VERSION),
+    new ResellerControllerProvider()
+);
+
+$app->mount(
+    sprintf('/api/language', API_VERSION),
+    new LanguageControllerProvider()
+);
 return $app;

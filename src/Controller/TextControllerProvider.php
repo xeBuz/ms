@@ -4,11 +4,9 @@ namespace Mono\Controller;
 
 use Mono\Repository\ResellerRepository;
 use Silex\Application;
-use Silex\Api\ControllerProviderInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 
-class TextControllerProvider implements ControllerProviderInterface
+class TextControllerProvider extends MonoController
 {
     public function connect(Application $app)
     {
@@ -18,13 +16,18 @@ class TextControllerProvider implements ControllerProviderInterface
             return 'YES';
         });
 
-        $controllers->get('/resellers', function (Application $app) {
-            $db = new ResellerRepository($app);
-            $resellers = $db->getAll();
+//        $controllers->get('/resellers', function (Application $app) {
+//            $db = new ResellerRepository($app);
+//            $resellers = $db->getAll();
+//
+//            $response = [];
+//            foreach ($resellers as $reseller) {
+//                $response['resellers'][] = $reseller->getResponse();
+//            }
+//
+//            return $this->createResponse($response);
+//        });
 
-            return Response::create($resellers);
-            // var_dump($resellers);
-        });
 
         return $controllers;
     }

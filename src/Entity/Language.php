@@ -3,7 +3,7 @@
 namespace Mono\Entity;
 
 
-class Language
+class Language implements MonoEntity
 {
     private $id;
     private $name;
@@ -28,6 +28,7 @@ class Language
      * @return Language
      */
     public static function createFromArray($array) {
+
         if (isset($array['id'])) {
             $id = $array['id'];
         } else {
@@ -48,6 +49,18 @@ class Language
 
 
         return new Language($id, $name, $code);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return [
+            'id'   => $this->getId(),
+            'name' => $this->getName(),
+            'code' => $this->getCode()
+        ];
     }
 
 
@@ -98,5 +111,4 @@ class Language
     {
         $this->code = $code;
     }
-
 }
