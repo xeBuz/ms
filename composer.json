@@ -1,0 +1,16 @@
+{
+  "name": "MS Backend",
+  "description": "API solution for text and resellers",
+  "keywords": [],
+  "homepage": "https://github.com/xeBuz/ms",
+  "license": "MIT",
+  "require": {
+      "silex/silex": "~2.0",
+      "doctrine/dbal": "~2.2"
+  },
+  "autoload": {
+      "psr-0": {
+          "Mono": "src/"
+      }
+  }
+}
