@@ -2,6 +2,9 @@
 
 namespace Mono\Controller;
 
+use Mono\Entity\Language;
+use Mono\Entity\Reseller;
+use Mono\Repository\LanguageRepository;
 use Mono\Repository\ResellerRepository;
 use Silex\Application;
 
@@ -15,10 +18,18 @@ class ResellerControllerProvider extends MonoController
         $controllers->get('/', function (Application $app) {
             $response = [];
 
-            $db = new ResellerRepository($app);
-            $resellers = $db->getAll();
+            $conn_reseller = new ResellerRepository($app);
+            $conn_language = new LanguageRepository($app);
+
+            $resellers = $conn_reseller->getAll();
 
             foreach ($resellers as $reseller) {
+                $reseller['default_language'] = Language::createFromArray(
+                    $conn_language->getById($reseller['default_language_id'])
+                );
+
+                $reseller = Reseller::createFromArray($reseller);
+
                 $response['resellers'][] = $reseller->getResponse();
             }
 

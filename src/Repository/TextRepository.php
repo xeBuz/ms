@@ -31,10 +31,6 @@ class TextRepository extends MonoRepository
             $text = $this->getByKeyAndResellerByDefault($key, $reseller);
         }
 
-        if (!empty($text)) {
-            $text = Text::createFromArray($text);
-        }
-
         return $text;
     }
 
@@ -52,15 +48,9 @@ class TextRepository extends MonoRepository
                 AND r.id = ? 
                 AND t.language_id = r.default_language_id";
 
-        $text = $this->fetchOne(
+        return $this->fetchOne(
             $sql,
             [(string) $key, $reseller->getId()]
         );
-
-        if (empty($text)) {
-            return $text;
-        }
-
-        return Text::createFromArray($text);
     }
 }

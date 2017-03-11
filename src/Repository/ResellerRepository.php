@@ -13,15 +13,8 @@ class ResellerRepository extends MonoRepository
      */
     public function getAll() {
         $sql = "SELECT id, `name`, default_language_id, address, phone, enabled FROM resellers";
-        $resellers = $this->fetch($sql);
 
-        $data = [];
-
-        foreach ($resellers as $reseller) {
-            $data[] = Reseller::createFromArray($reseller);
-        }
-
-        return $data;
+        return $this->fetch($sql);
     }
 
 
@@ -30,13 +23,8 @@ class ResellerRepository extends MonoRepository
      * @return mixed|Reseller
      */
     public function getById($id) {
-        $sql = "SELECT id, `name`, default_language_id, address, phone, enabled FROM reseller WHERE id = ?";
-        $reseller = $this->fetchOne($sql, [(integer) $id]);
+        $sql = "SELECT id, `name`, default_language_id, address, phone, enabled FROM resellers WHERE id = ?";
 
-        if (empty($reseller)) {
-            return $reseller;
-        }
-
-        return Reseller::createFromArray($reseller);
+        return $this->fetchOne($sql, [(integer) $id]);
     }
 }

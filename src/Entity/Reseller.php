@@ -55,11 +55,11 @@ class Reseller implements MonoEntity
             throw new \InvalidArgumentException('Missing field "name"');
         }
 
-//        if (isset($array['default_language_id'])) {
-//            $default_language = $array['default_language_id'];
-//        } else {
-//            throw new \InvalidArgumentException('Missing field "default_language_id"');
-//        }
+        if (isset($array['default_language'])) {
+            $default_language = $array['default_language'];
+        } else {
+            throw new \InvalidArgumentException('Missing field "default_language"');
+        }
 
         if (isset($array['address'])) {
             $address = $array['address'];
@@ -73,7 +73,6 @@ class Reseller implements MonoEntity
             $active = $array['active'];
         }
 
-        $default_language = new Language(1, '3', '4');
         return new Reseller($id, $name, $default_language, $address, $phone, $active);
     }
 
@@ -86,7 +85,7 @@ class Reseller implements MonoEntity
         return [
             'id'               => $this->getId(),
             'name'             => $this->getName(),
-            'default_language' => $this->getDefaultLanguage()->getResponse(),
+            'default_language' => $this->getDefaultLanguage()->getCode(),
             'address'          => $this->getAddress(),
             'phone'            => $this->getPhone(),
             'active'           => $this->getActive()

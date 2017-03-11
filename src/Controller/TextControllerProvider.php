@@ -2,6 +2,9 @@
 
 namespace Mono\Controller;
 
+use Mono\Entity\Language;
+use Mono\Entity\Reseller;
+use Mono\Entity\Text;
 use Mono\Repository\LanguageRepository;
 use Mono\Repository\ResellerRepository;
 use Mono\Repository\TextRepository;
@@ -22,19 +25,25 @@ class TextControllerProvider extends MonoController
             $conn_lang = new LanguageRepository($app);
 
             $reseller = $conn_reseller->getById($reseller_id);
-            if (empty($reseller)) {
-                $response = $this->createResponse404();
-            }
+            $reseller['default_language'] = Language::createFromArray(
+                $conn_lang->getById($reseller['default_language_id'])
+            );
+            $reseller = Reseller::createFromArray($reseller);
 
             $language = $conn_lang->getByCode($language_code);
-            if (empty($language)) {
-                $response = $this->createResponse404();
-            }
+            $language = Language::createFromArray($language);
 
             $text = $conn_text->getByKeyAndResellerAndLanguage($key, $reseller, $language);
 
             if (!empty($text)) {
-                $response['text']  = $text->getResponse();
+                $text['reseller'] = $reseller;
+
+                // I need to query again, because it could be the fallback language, not the originally requested
+                $text['language'] = Language::createFromArray(
+                    $conn_lang->getById($text['language_id'])
+                );
+
+                $response = Text::createFromArray($text)->getResponse();
             }
 
             return $this->createResponse($response);

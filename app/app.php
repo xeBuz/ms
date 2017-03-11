@@ -3,6 +3,7 @@
 use Mono\Controller\LanguageControllerProvider;
 use Mono\Controller\ResellerControllerProvider;
 use Mono\Controller\TextControllerProvider;
+use Mono\Repository\LanguageRepository;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 

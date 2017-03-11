@@ -2,6 +2,7 @@
 
 namespace Mono\Controller;
 
+use Mono\Entity\Language;
 use Mono\Repository\LanguageRepository;
 use Silex\Application;
 
@@ -19,7 +20,7 @@ class LanguageControllerProvider extends MonoController
             $languages = $db->getAll();
 
             foreach ($languages as $language) {
-                $response['languages'][] = $language->getResponse();
+                $response['languages'][] = Language::createFromArray($language)->getResponse();
             }
 
             return $this->createResponse($response);
@@ -32,7 +33,9 @@ class LanguageControllerProvider extends MonoController
             if (empty($language)) {
                 $response = $this->createResponse404();
             } else {
-                $response = $this->createResponse($language->getResponse());
+                $response = $this->createResponse(
+                    Language::createFromArray($language)->getResponse()
+                );
             }
 
             return $response;

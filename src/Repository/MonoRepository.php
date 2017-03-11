@@ -2,13 +2,21 @@
 
 namespace Mono\Repository;
 
+
 use Silex\Application;
 
 class MonoRepository
 {
     private $db;
 
-    public function __construct(Application $app) {
+
+    /**
+     * Bootstraps the application.
+     *
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
         $this->db = $app['db'];
     }
 
@@ -19,6 +27,7 @@ class MonoRepository
      */
     protected function fetch($sql, $params = []) {
         $statement = $this->db->executeQuery($sql, $params);
+
         return $statement->fetchAll();
     }
 

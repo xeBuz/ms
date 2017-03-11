@@ -12,16 +12,9 @@ class LanguageRepository extends MonoRepository
      * @return array
      */
     public function getAll() {
-        $data = [];
-
         $sql = "SELECT id, `code`, `name` FROM languages";
-        $languages = $this->fetch($sql);
 
-        foreach ($languages as $language) {
-            $data[] = Language::createFromArray($language);
-        }
-
-        return $data;
+        return $this->fetch($sql);
     }
 
     /**
@@ -30,13 +23,8 @@ class LanguageRepository extends MonoRepository
      */
     public function getByCode($code) {
         $sql = "SELECT id, `code`, `name` FROM languages WHERE `code` LIKE ?";
-        $language = $this->fetchOne($sql, [(string) $code]);
 
-        if (empty($language)) {
-            return $language;
-        }
-
-        return Language::createFromArray($language);
+        return $this->fetchOne($sql, [(string) $code]);
     }
 
 
@@ -46,13 +34,8 @@ class LanguageRepository extends MonoRepository
      */
     public function getById($id) {
         $sql = "SELECT id, `code`, `name` FROM languages WHERE id = ?";
-        $language = $this->fetchOne($sql, [(integer) $id]);
 
-        if (empty($language)) {
-            return $language;
-        }
-
-        return Language::createFromArray($language);
+        return $this->fetchOne($sql, [(integer) $id]);
     }
 
 }
