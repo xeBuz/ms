@@ -14,7 +14,7 @@ class LanguageRepository extends MonoRepository
     public function getAll() {
         $data = [];
 
-        $sql = "SELECT * FROM languages";
+        $sql = "SELECT id, code, name FROM languages";
         $languages = $this->fetch($sql);
 
         foreach ($languages as $language) {
@@ -29,7 +29,7 @@ class LanguageRepository extends MonoRepository
      * @return Language
      */
     public function getByCode($code) {
-        $sql = "SELECT * FROM languages WHERE code LIKE ?";
+        $sql = "SELECT id, code, name FROM languages WHERE code LIKE ?";
         $language = $this->fetchOne($sql, [(string) $code]);
 
         if (empty($language)) {

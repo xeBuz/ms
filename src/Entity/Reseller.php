@@ -7,6 +7,7 @@ class Reseller implements MonoEntity
 {
     private $id;
     private $name;
+    private $default_language;
     private $address;
     private $phone;
     private $active;
@@ -16,13 +17,15 @@ class Reseller implements MonoEntity
      *
      * @param $id
      * @param $name
+     * @param Language $default_language
      * @param $address
      * @param $phone
      * @param $active
      */
-    public function __construct($id, $name, $address, $phone, $active) {
+    public function __construct($id, $name, Language $default_language, $address, $phone, $active) {
         $this->id = $id;
         $this->name = $name;
+        $this->default_language = $default_language;
         $this->address = $address;
         $this->phone = $phone;
         $this->active = $active;
@@ -50,6 +53,12 @@ class Reseller implements MonoEntity
             throw new \InvalidArgumentException('Missing field "name"');
         }
 
+        if (isset($array['default_language'])) {
+            $default_language = $array['default_language'];
+        } else {
+            throw new \InvalidArgumentException('Missing field "default_language"');
+        }
+
         if (isset($array['address'])) {
             $address = $array['address'];
         }
@@ -62,7 +71,7 @@ class Reseller implements MonoEntity
             $active = $array['active'];
         }
 
-        return new Reseller($id, $name, $address, $phone, $active);
+        return new Reseller($id, $name, $default_language, $address, $phone, $active);
     }
 
 
@@ -147,5 +156,21 @@ class Reseller implements MonoEntity
     public function setActive($active)
     {
         $this->active = $active;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultLanguage()
+    {
+        return $this->default_language;
+    }
+
+    /**
+     * @param mixed $default_language
+     */
+    public function setDefaultLanguage(Language $default_language)
+    {
+        $this->default_language = $default_language;
     }
 }
