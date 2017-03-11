@@ -15,12 +15,12 @@ class Reseller implements MonoEntity
     /**
      * Reseller constructor.
      *
-     * @param $id
-     * @param $name
+     * @param integer $id
+     * @param string $name
      * @param Language $default_language
-     * @param $address
-     * @param $phone
-     * @param $active
+     * @param string $address
+     * @param string $phone
+     * @param boolean $active
      */
     public function __construct($id, $name, Language $default_language, $address, $phone, $active) {
         $this->id = $id;
@@ -75,14 +75,18 @@ class Reseller implements MonoEntity
     }
 
 
+    /**
+     * @return array
+     */
     public function getResponse()
     {
         return [
-            'id'      => $this->getId(),
-            'name'    => $this->getName(),
-            'address' => $this->getAddress(),
-            'phone'   => $this->getPhone(),
-            'active'  => $this->getActive()
+            'id'               => $this->getId(),
+            'name'             => $this->getName(),
+            'default_language' => $this->getDefaultLanguage()->getResponse(),
+            'address'          => $this->getAddress(),
+            'phone'            => $this->getPhone(),
+            'active'           => $this->getActive()
         ];
     }
 

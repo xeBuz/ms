@@ -12,7 +12,7 @@ class ResellerRepository extends MonoRepository
      * @return array
      */
     public function getAll() {
-        $sql = "SELECT id, name, default_language_id, address, phone, enabled FROM resellers";
+        $sql = "SELECT id, `name`, default_language_id, address, phone, enabled FROM resellers";
         $resellers = $this->fetch($sql);
 
         $data = [];
@@ -30,7 +30,7 @@ class ResellerRepository extends MonoRepository
      * @return mixed|Reseller
      */
     public function getById($id) {
-        $sql = "SELECT id, name, default_language_id, address, phone, enabled FROM reseller WHERE id = ?";
+        $sql = "SELECT id, `name`, default_language_id, address, phone, enabled FROM reseller WHERE id = ?";
         $reseller = $this->fetchOne($sql, [(integer) $id]);
 
         if (empty($reseller)) {

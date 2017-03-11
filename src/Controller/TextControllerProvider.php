@@ -15,6 +15,8 @@ class TextControllerProvider extends MonoController
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/{reseller_id}/{key}/{language_code}', function(Application $app, $reseller_id, $key, $language_code) {
+            $response = [];
+
             $conn_text = new TextRepository($app);
             $conn_reseller = new ResellerRepository($app);
             $conn_lang = new LanguageRepository($app);
@@ -30,8 +32,12 @@ class TextControllerProvider extends MonoController
             }
 
             $text = $conn_text->getByKeyAndResellerAndLanguage($key, $reseller, $language);
-            $response['text']  = $text->getResponse();
-            return $response;
+
+            if (!empty($text)) {
+                $response['text']  = $text->getResponse();
+            }
+
+            return $this->createResponse($response);
         });
 
         return $controllers;
