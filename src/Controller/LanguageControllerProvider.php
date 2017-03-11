@@ -9,11 +9,16 @@ use Silex\Application;
 
 class LanguageControllerProvider extends MonoController
 {
+    /**
+     * @param Application $app
+     * @return mixed
+     */
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('', function (Application $app) {
+        // Base endpoint, return all the languages available
+        $controllers->get('/', function (Application $app) {
             $response = [];
 
             $db = new LanguageRepository($app);
@@ -26,6 +31,7 @@ class LanguageControllerProvider extends MonoController
             return $this->createResponse($response);
         });
 
+        // Return a specific language, by ISO 639-1 Code (e.g: en, da, fi)
         $controllers->get('/{code}', function(Application $app, $code) {
             $db = new LanguageRepository($app);
             $language = $db->getByCode($code);

@@ -9,6 +9,8 @@ class LanguageRepository extends MonoRepository
 {
 
     /**
+     * Fetch all Languages from the Database
+     *
      * @return array
      */
     public function getAll() {
@@ -18,6 +20,8 @@ class LanguageRepository extends MonoRepository
     }
 
     /**
+     * Fetch one Language from the Database by by ISO 639-1 Code
+     *
      * @param $code
      * @return Language
      */
@@ -29,6 +33,8 @@ class LanguageRepository extends MonoRepository
 
 
     /**
+     * Fetch one Language from the Database by Id
+     *
      * @param $id
      * @return mixed|Language
      */

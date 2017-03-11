@@ -9,6 +9,8 @@ class ResellerRepository extends MonoRepository
 {
 
     /**
+     * Fetch all Resellers from the Database
+     *
      * @return array
      */
     public function getAll() {
@@ -19,6 +21,8 @@ class ResellerRepository extends MonoRepository
 
 
     /**
+     * Fetch one Resellers from the Database by Id
+     *
      * @param $id
      * @return mixed|Reseller
      */

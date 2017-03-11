@@ -35,13 +35,15 @@ class Reseller implements MonoEntity
 
 
     /**
+     * Create an Entity with an Associative Array
+     *
      * @param $array
      * @return Reseller
      */
     public static function createFromArray($array) {
         $address = null;
-        $phone = null;
-        $active = true;
+        $phone   = null;
+        $active  = true;
 
         if (isset($array['id'])) {
             $id = $array['id'];
@@ -78,6 +80,8 @@ class Reseller implements MonoEntity
 
 
     /**
+     * Get the object as an associative array, to return it later as a JSON object
+     *
      * @return array
      */
     public function getResponse()
@@ -93,11 +97,11 @@ class Reseller implements MonoEntity
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getId()
     {
-        return $this->id;
+        return (integer) $this->id;
     }
 
     /**
@@ -109,11 +113,11 @@ class Reseller implements MonoEntity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
-        return $this->name;
+        return (string) $this->name;
     }
 
     /**

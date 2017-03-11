@@ -15,6 +15,7 @@ class ResellerControllerProvider extends MonoController
     {
         $controllers = $app['controllers_factory'];
 
+        // Base endpoint, return all the resellers
         $controllers->get('/', function (Application $app) {
             $response = [];
 

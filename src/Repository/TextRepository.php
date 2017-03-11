@@ -10,6 +10,10 @@ class TextRepository extends MonoRepository
 {
 
     /**
+     * Get a Text, providing the Reseller ID, Key and Language code.
+     * The last parameter will enable the fallback response, returning the default language if the requested
+     * language isn't available.
+     *
      * @param $key
      * @param Reseller $reseller
      * @param Language $language
@@ -35,6 +39,8 @@ class TextRepository extends MonoRepository
     }
 
     /**
+     * Return the Text by key and language, using the default language
+     *
      * @param $key
      * @param Reseller $reseller
      * @return mixed

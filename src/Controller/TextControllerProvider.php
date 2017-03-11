@@ -17,12 +17,15 @@ class TextControllerProvider extends MonoController
     {
         $controllers = $app['controllers_factory'];
 
+        // Get one Text in the specific Language, for a particular Reseller.
+        // The first values is the Reseller, then the key to obtain and the Language
+        // If the Language isn't available, the endpoint will return the default language (by Reseller)
         $controllers->get('/{reseller_id}/{key}/{language_code}', function(Application $app, $reseller_id, $key, $language_code) {
             $response = [];
 
-            $conn_text = new TextRepository($app);
+            $conn_text     = new TextRepository($app);
             $conn_reseller = new ResellerRepository($app);
-            $conn_lang = new LanguageRepository($app);
+            $conn_lang     = new LanguageRepository($app);
 
             $reseller = $conn_reseller->getById($reseller_id);
             $reseller['default_language'] = Language::createFromArray(

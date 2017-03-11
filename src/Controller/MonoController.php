@@ -26,16 +26,28 @@ class MonoController implements ControllerProviderInterface
      * @return ControllerCollection A ControllerCollection instance
      */
     public function connect(Application $app) {
-        // TODO: Implement connect() method
     }
 
 
+    /**
+     * Return a JSON response, with a specified body and status code
+     *
+     * @param $array
+     * @param int $status
+     * @return JsonResponse
+     */
     protected function createResponse($array, $status = Response::HTTP_OK) {
         $response = new JsonResponse();
+
         return $response->setData($array)->setStatusCode($status)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
 
+    /**
+     * Return a JSON response for 404 Not Found
+     *
+     * @return JsonResponse
+     */
     protected function createResponse404() {
         $response = new JsonResponse();
         return $response->setData('Not Found')->setStatusCode(Response::HTTP_NOT_FOUND)->setEncodingOptions(JSON_NUMERIC_CHECK);

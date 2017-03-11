@@ -24,6 +24,8 @@ class Language implements MonoEntity
 
 
     /**
+     * Create an Entity with an Associative Array
+     *
      * @param $array
      * @return Language
      */
@@ -52,6 +54,8 @@ class Language implements MonoEntity
     }
 
     /**
+     * Get the object as an associative array, to return it later as a JSON object
+     *
      * @return mixed
      */
     public function getResponse()
@@ -65,11 +69,11 @@ class Language implements MonoEntity
 
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
-        return $this->id;
+        return (integer) $this->id;
     }
 
     /**
@@ -80,12 +84,13 @@ class Language implements MonoEntity
         $this->id = $id;
     }
 
+
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
-        return $this->name;
+        return (string) $this->name;
     }
 
     /**
@@ -97,11 +102,11 @@ class Language implements MonoEntity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCode()
     {
-        return $this->code;
+        return (string) $this->code;
     }
 
     /**

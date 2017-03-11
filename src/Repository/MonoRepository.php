@@ -21,6 +21,8 @@ class MonoRepository
     }
 
     /**
+     * Generic method to query the Database with a custom SQL query and the parameters
+     *
      * @param $sql
      * @param array $params
      * @return mixed
@@ -32,6 +34,9 @@ class MonoRepository
     }
 
     /**
+     * Generic method to query the Database with a custom SQL query and the parameters. This method will obtain
+     * just the first element in the response
+     *
      * @param $sql
      * @param array $params
      * @return mixed

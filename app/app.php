@@ -3,35 +3,38 @@
 use Mono\Controller\LanguageControllerProvider;
 use Mono\Controller\ResellerControllerProvider;
 use Mono\Controller\TextControllerProvider;
-use Mono\Repository\LanguageRepository;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 
 const API_VERSION = 'v1.0';
 
-$db   =  require __DIR__ . '/../config/db_mysql.php';
+$db   =  require __DIR__ . '/../config/db.php';
 $conf =  require __DIR__ . '/../config/conf.php';
 
 
 $app = new Application();
 
 
+// Register Doctrine to interact with the DB
 $app->register(new DoctrineServiceProvider(),
     $db
 );
 
+// Mount the Controllers
 $app->mount(
-    sprintf('/api/text', API_VERSION),
+    sprintf('/api/%s/text', API_VERSION),
     new TextControllerProvider()
 );
 
 $app->mount(
-    sprintf('/api/reseller', API_VERSION),
+    sprintf('/api/%s/reseller', API_VERSION),
     new ResellerControllerProvider()
 );
 
 $app->mount(
-    sprintf('/api/language', API_VERSION),
+    sprintf('/api/%s/language', API_VERSION),
     new LanguageControllerProvider()
 );
+
+
 return $app;
