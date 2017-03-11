@@ -82,7 +82,7 @@ class Text implements MonoEntity
             'id'       => $this->getId(),
             'key'      => $this->getKey(),
             'value'    => $this->getValue(),
-            'reseller' => $this->getReseller()->getResponse(),
+            'reseller' => $this->getReseller()->getName(),
             'language' => $this->getLanguage()->getCode()
         ];
     }
