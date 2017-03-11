@@ -12,7 +12,7 @@ class LanguageRepository extends MonoRepository
      * @return array
      */
     public function getAll() {
-        $response = [];
+        $data = [];
 
         $sql = "SELECT * FROM languages";
         $languages = $this->fetch($sql);

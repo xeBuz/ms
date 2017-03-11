@@ -23,4 +23,20 @@ class ResellerRepository extends MonoRepository
 
         return $data;
     }
+
+
+    /**
+     * @param $id
+     * @return mixed|Reseller
+     */
+    public function getById($id) {
+        $sql = "SELECT * FROM reseller WHERE id = ?";
+        $reseller = $this->fetchOne($sql, [(integer) $id]);
+
+        if (empty($reseller)) {
+            return $reseller;
+        }
+
+        return Reseller::createFromArray($reseller);
+    }
 }
