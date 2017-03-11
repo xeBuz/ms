@@ -39,4 +39,20 @@ class LanguageRepository extends MonoRepository
         return Language::createFromArray($language);
     }
 
+
+    /**
+     * @param $id
+     * @return mixed|Language
+     */
+    public function getById($id) {
+        $sql = "SELECT id, `code`, `name` FROM languages WHERE id = ?";
+        $language = $this->fetchOne($sql, [(integer) $id]);
+
+        if (empty($language)) {
+            return $language;
+        }
+
+        return Language::createFromArray($language);
+    }
+
 }
