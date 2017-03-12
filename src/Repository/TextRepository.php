@@ -59,4 +59,28 @@ class TextRepository extends MonoRepository
             [(string) $key, $reseller->getId()]
         );
     }
+
+
+    /**
+     * Create a new Text
+     *
+     * @param $key
+     * @param $value
+     * @param Reseller $reseller
+     * @param Language $language
+     *
+     * @return mixed
+     */
+    public function addNew($key, $value, Reseller $reseller, Language $language) {
+
+        return $this->db->insert(
+            'texts',
+            [
+                '`key`' => $key,
+                '`value`' => $value,
+                'reseller_id' => $reseller->getId(),
+                'language_id' => $language->getId()
+            ]
+        );
+    }
 }

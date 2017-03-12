@@ -7,7 +7,7 @@ use Silex\Application;
 
 class MonoRepository
 {
-    private $db;
+    protected $db;
 
 
     /**

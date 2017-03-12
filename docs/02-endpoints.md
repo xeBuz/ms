@@ -100,6 +100,8 @@ X-Powered-By: PHP/7.0.15-0ubuntu0.16.04.4
 
 ## Text
 
+### Get a Text in a specific language (or the fallback)
+
 ```
 http http://localhost:8888/api/v1.0/text/1/title/en
 http http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/text/1/title/en
@@ -137,3 +139,19 @@ This endpoint contain 3 parts:
 ```
 /api/v1.0/text/{reseller_id}/{key}/{language_code}
 ```
+
+### Create a new Text
+
+```$bash
+http -f POST http://localhost:8888/api/v1.0/text/ key=answer value=Answer reseller_id=1 language_code=en
+http -f POST http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/text/ key=answer value=Answer reseller_id=1 
+```
+
+This endpoint is using a POST form with 4 values:
+* `key`
+* `value`
+* `reseller_id`
+* `language_code`
+
+All fields are required and validated. To create a new text in any language you must create the default language first, with this restriction the fallback is granted.
+You can't create duplicated texts.

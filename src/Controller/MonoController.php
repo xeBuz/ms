@@ -42,6 +42,17 @@ class MonoController implements ControllerProviderInterface
 
 
     /**
+     * Return a JSON response, for 201 Created
+     *
+     * @return JsonResponse
+     */
+    protected function createResponse201() {
+        return $this->generateResponse('Created', Response::HTTP_CREATED);
+    }
+
+
+
+    /**
      * Return a JSON response for 404 Not Found
      *
      * @param $notFound
