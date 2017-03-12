@@ -37,19 +37,62 @@ class MonoController implements ControllerProviderInterface
      * @return JsonResponse
      */
     protected function createResponse($array, $status = Response::HTTP_OK) {
-        $response = new JsonResponse();
-
-        return $response->setData($array)->setStatusCode($status)->setEncodingOptions(JSON_NUMERIC_CHECK);
+        return $this->generateResponse($array, $status);
     }
 
 
     /**
      * Return a JSON response for 404 Not Found
      *
+     * @param $notFound
      * @return JsonResponse
      */
-    protected function createResponse404() {
-        $response = new JsonResponse();
-        return $response->setData('Not Found')->setStatusCode(Response::HTTP_NOT_FOUND)->setEncodingOptions(JSON_NUMERIC_CHECK);
+    protected function createResponse404($notFound = null) {
+        return $this->generateResponse(
+            trim(sprintf('Not Found %s', $notFound)),
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+
+    /**
+     * Return a JSON response for 500 Server Error
+     *
+     * @param null $error
+     * @return JsonResponse
+     */
+    protected function createResponse500($error = null) {
+
+        return $this->generateResponse(
+            trim(sprintf('Internal Server Error %s', $error)),
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
+    }
+
+
+    /**
+     * Generic API response
+     *
+     * @param $data
+     * @param $code
+     * @return JsonResponse
+     */
+    private function generateResponse($data, $code) {
+        $json = new JsonResponse();
+        $response = [];
+
+        if ($code === Response::HTTP_OK) {
+            $response['data'] = $data;
+        } else {
+            $response['errors'] = [
+                'message' => $data
+            ];
+        }
+
+        $response['status'] = [
+            'code' => $code,
+        ];
+
+        return $json->setData($response)->setStatusCode($code)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 }

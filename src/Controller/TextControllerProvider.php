@@ -2,6 +2,7 @@
 
 namespace Mono\Controller;
 
+use Exception;
 use Mono\Entity\Language;
 use Mono\Entity\Reseller;
 use Mono\Entity\Text;
@@ -28,25 +29,36 @@ class TextControllerProvider extends MonoController
             $conn_lang     = new LanguageRepository($app);
 
             $reseller = $conn_reseller->getById($reseller_id);
+            if (empty($reseller)) {
+                return $this->createResponse404('Reseller');
+            }
+
             $reseller['default_language'] = Language::createFromArray(
                 $conn_lang->getById($reseller['default_language_id'])
             );
             $reseller = Reseller::createFromArray($reseller);
 
-            $language = $conn_lang->getByCode($language_code);
-            $language = Language::createFromArray($language);
 
+            $language = $conn_lang->getByCode($language_code);
+            if (empty($language)) {
+                return $this->createResponse500('Invalid Language Code');
+            }
+            $language = Language::createFromArray($language);
             $text = $conn_text->getByKeyAndResellerAndLanguage($key, $reseller, $language);
 
             if (!empty($text)) {
-                $text['reseller'] = $reseller;
+                try {
+                    // I need to query again, because it could be the fallback language, not the originally requested
+                    $text['language'] = Language::createFromArray(
+                        $conn_lang->getById($text['language_id'])
+                    );
+                    $text['reseller'] = $reseller;
 
-                // I need to query again, because it could be the fallback language, not the originally requested
-                $text['language'] = Language::createFromArray(
-                    $conn_lang->getById($text['language_id'])
-                );
+                    $response['text'] = Text::createFromArray($text)->getResponse();
 
-                $response = Text::createFromArray($text)->getResponse();
+                } catch (Exception $e) {
+                    return $this->createResponse500($e->getMessage());
+                }
             }
 
             return $this->createResponse($response);

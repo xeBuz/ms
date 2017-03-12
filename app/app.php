@@ -9,11 +9,8 @@ use Silex\Provider\DoctrineServiceProvider;
 const API_VERSION = 'v1.0';
 
 $db   =  require __DIR__ . '/../config/db.php';
-$conf =  require __DIR__ . '/../config/conf.php';
-
 
 $app = new Application();
-
 
 // Register Doctrine to interact with the DB
 $app->register(new DoctrineServiceProvider(),

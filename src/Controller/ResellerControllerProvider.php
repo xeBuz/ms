@@ -2,6 +2,7 @@
 
 namespace Mono\Controller;
 
+use Exception;
 use Mono\Entity\Language;
 use Mono\Entity\Reseller;
 use Mono\Repository\LanguageRepository;
@@ -24,14 +25,19 @@ class ResellerControllerProvider extends MonoController
 
             $resellers = $conn_reseller->getAll();
 
-            foreach ($resellers as $reseller) {
-                $reseller['default_language'] = Language::createFromArray(
-                    $conn_language->getById($reseller['default_language_id'])
-                );
+            try {
+                foreach ($resellers as $reseller) {
+                    $reseller['default_language'] = Language::createFromArray(
+                        $conn_language->getById($reseller['default_language_id'])
+                    );
 
-                $reseller = Reseller::createFromArray($reseller);
+                    $reseller = Reseller::createFromArray($reseller);
 
-                $response['resellers'][] = $reseller->getResponse();
+                    $response['resellers'][] = $reseller->getResponse();
+                }
+
+            } catch (Exception $e) {
+                return $this->createResponse500($e->getMessage());
             }
 
             return $this->createResponse($response);

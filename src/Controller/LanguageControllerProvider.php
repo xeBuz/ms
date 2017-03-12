@@ -37,7 +37,9 @@ class LanguageControllerProvider extends MonoController
             $language = $db->getByCode($code);
 
             if (empty($language)) {
-                $response = $this->createResponse404();
+                $response = $this->createResponse404(
+                    sprintf('Language Code: %s', $code)
+                );
             } else {
                 $response = $this->createResponse(
                     Language::createFromArray($language)->getResponse()
