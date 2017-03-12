@@ -13,3 +13,5 @@ The code is PHP5/7 compatible. (but you need to change the PHPUnit version if yo
 
  The Endpoint documentation is available [here](docs/02-endpoints.md)
 
+## Extras
+  Extra information [here](docs/03-extras.md)

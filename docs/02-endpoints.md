@@ -7,13 +7,17 @@ I personally recommend [httpie](https://httpie.org/) for testing the endpoints, 
 ### Get all available languages
 ```
 http http://localhost:8888/api/v1.0/language/
+http http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/language/
 ```
+
+
 
 ### Get a language by ISO 639-1 Code (e.g: en, da, fi)
 
 
 ```
 http http://localhost:8888/api/v1.0/language/de
+http http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/language/de
 ```
 
 ```bash
@@ -46,7 +50,9 @@ If the code isn't valid, you will get a 404 error.
 ### Get all the resellers
 ```
 http http://localhost:8888/api/v1.0/reseller/
+http http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/reseller/
 ```
+
 ```bash
 HTTP/1.1 200 OK
 Cache-Control: no-cache, private
@@ -96,7 +102,9 @@ X-Powered-By: PHP/7.0.15-0ubuntu0.16.04.4
 
 ```
 http http://localhost:8888/api/v1.0/text/1/title/en
+http http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/text/1/title/en
 ```
+
 ```bash
 HTTP/1.1 200 OK
 Cache-Control: no-cache, private
