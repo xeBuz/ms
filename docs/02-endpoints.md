@@ -144,7 +144,7 @@ This endpoint contain 3 parts:
 
 ```$bash
 http -f POST http://localhost:8888/api/v1.0/text/ key=answer value=Answer reseller_id=1 language_code=en
-http -f POST http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/text/ key=answer value=Answer reseller_id=1 
+http -f POST http://ec2-35-167-98-24.us-west-2.compute.amazonaws.com/api/v1.0/text/ key=answer value=Answer reseller_id=1 language_code=en
 ```
 
 This endpoint is using a POST form with 4 values:
